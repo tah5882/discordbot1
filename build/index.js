@@ -22,7 +22,6 @@ const client = new discord_js_1.Client({
     intents: [
         discord_js_1.GatewayIntentBits.Guilds,
         discord_js_1.GatewayIntentBits.GuildMembers,
-        discord_js_1.GatewayIntentBits.GuildBans,
         discord_js_1.GatewayIntentBits.GuildEmojisAndStickers,
         discord_js_1.GatewayIntentBits.GuildIntegrations,
         discord_js_1.GatewayIntentBits.GuildWebhooks,
@@ -67,7 +66,8 @@ client.on('messageCreate', (message) => __awaiter(void 0, void 0, void 0, functi
 client.on("guildMemberAdd", member => {
     if (member.guild.id !== "993439391496290345")
         return;
-    member.guild.channels.cache.get("1174516722120786071").send(`${member.user}が参加しました！`);
+    const channel = member.guild.channels.cache.get("993439391496290347");
+    channel.send(`${member.user}が参加しました！`);
 });
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN);
