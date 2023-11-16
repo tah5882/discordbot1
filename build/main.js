@@ -20,13 +20,33 @@ dotenv_1.default.config();
 //Botで使うGatewayIntents、partials
 const client = new discord_js_1.Client({
     intents: [
-        discord_js_1.GatewayIntentBits.DirectMessages,
         discord_js_1.GatewayIntentBits.Guilds,
         discord_js_1.GatewayIntentBits.GuildMembers,
+        discord_js_1.GatewayIntentBits.GuildBans,
+        discord_js_1.GatewayIntentBits.GuildEmojisAndStickers,
+        discord_js_1.GatewayIntentBits.GuildIntegrations,
+        discord_js_1.GatewayIntentBits.GuildWebhooks,
+        discord_js_1.GatewayIntentBits.GuildInvites,
+        discord_js_1.GatewayIntentBits.GuildVoiceStates,
+        discord_js_1.GatewayIntentBits.GuildPresences,
         discord_js_1.GatewayIntentBits.GuildMessages,
+        discord_js_1.GatewayIntentBits.GuildMessageReactions,
+        discord_js_1.GatewayIntentBits.GuildMessageTyping,
+        discord_js_1.GatewayIntentBits.DirectMessages,
+        discord_js_1.GatewayIntentBits.DirectMessageReactions,
+        discord_js_1.GatewayIntentBits.DirectMessageTyping,
         discord_js_1.GatewayIntentBits.MessageContent,
+        discord_js_1.GatewayIntentBits.GuildScheduledEvents,
     ],
-    partials: [discord_js_1.Partials.Message, discord_js_1.Partials.Channel],
+    partials: [
+        discord_js_1.Partials.User,
+        discord_js_1.Partials.Channel,
+        discord_js_1.Partials.GuildMember,
+        discord_js_1.Partials.Message,
+        discord_js_1.Partials.Reaction,
+        discord_js_1.Partials.GuildScheduledEvent,
+        discord_js_1.Partials.ThreadMember,
+    ],
 });
 //Botがきちんと起動したか確認
 client.once('ready', () => {
@@ -44,5 +64,10 @@ client.on('messageCreate', (message) => __awaiter(void 0, void 0, void 0, functi
         message.channel.send(date1.toLocaleString());
     }
 }));
+client.on("guildMemberAdd", member => {
+    if (member.guild.id !== "993439391496290345")
+        return;
+    member.guild.channels.cache.get("1174516722120786071").send(`${member.user}が参加しました！`);
+});
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN);
