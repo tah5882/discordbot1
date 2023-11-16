@@ -1,5 +1,4 @@
 //必要なパッケージをインポートする
-import { channel } from 'diagnostics_channel';
 import { GatewayIntentBits, Client, Partials, Message } from 'discord.js'
 import dotenv from 'dotenv'
 
@@ -11,7 +10,6 @@ const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildBans,
 		GatewayIntentBits.GuildEmojisAndStickers,
 		GatewayIntentBits.GuildIntegrations,
 		GatewayIntentBits.GuildWebhooks,
