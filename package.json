@@ -1,7 +1,6 @@
 {
   "name": "discord_ts",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "ts-node src/index.ts",
@@ -25,5 +24,6 @@
     "discord-api-types": "^0.37.63",
     "discord.js": "^14.14.1",
     "dotenv": "^16.3.1"
-  }
+  },
+  "description": ""
 }
