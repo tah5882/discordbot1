@@ -1,4 +1,5 @@
 //必要なパッケージをインポートする
+import { ChannelType } from 'discord.js'
 import { GatewayIntentBits, Client, Partials, Message } from 'discord.js'
 import dotenv from 'dotenv'
 
@@ -53,11 +54,13 @@ client.on('messageCreate', async (message: Message) => {
     }
 })
 
-client.on("guildMemberAdd", member => {
-    if (member.guild.id !== "993439391496290345") return;
-    const channel = member.guild.channels.cache.get("993439391496290347");
-    channel.send(`${member.user}が参加しました！`);
-});
+client.on('guildMemberAdd', async (member) => {
+	if (member.guild.id !== "993439391496290345") return;
+	const channel = member.guild.channels.cache.get("1174516722120786071");
+	if (!channel || channel.type !== ChannelType.GuildText) return;
+
+	channel.send(`<@!${member.user.id}>が参加しました！`)
+})
 
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN)
