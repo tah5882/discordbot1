@@ -1,5 +1,7 @@
 //必要なパッケージをインポートする
 import { ChannelType } from 'discord.js'
+import { SlashCommandBuilder } from '@discordjs/builders';
+import { CommandInteraction } from 'discord.js';
 import { GatewayIntentBits, Client, Partials, Message } from 'discord.js'
 import dotenv from 'dotenv'
 
@@ -61,6 +63,17 @@ client.on('guildMemberAdd', async (member) => {
 
 	channel.send(`<@!${member.user.id}>が参加しました！`)
 })
+
+const command = {
+	data: new SlashCommandBuilder()
+		.setName('ping')
+		.setDescription('Pong!と返信。'),
+	async execute(interaction: CommandInteraction) {
+		await interaction.reply('Pong!');
+	},
+};
+
+export default command;
 
 //ボット作成時のトークンでDiscordと接続
 client.login(process.env.TOKEN)
